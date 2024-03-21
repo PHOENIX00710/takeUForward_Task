@@ -1,0 +1,5 @@
+.cool-gradient-text {
+  color: #3b82f6;
+  text-shadow: 1px 1px 0px #4fd1c5, 2px 2px 4px rgba(0, 150, 199, 0.5),
+    -1px -1px 1px rgba(59, 130, 246, 0.5);
+}
