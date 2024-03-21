@@ -10,7 +10,7 @@ app.use(express.json())
 
 // To allow Vite Local host to get the request
 const corsOptions = {
-    origin: 'http://localhost:5173/',
+    origin: 'http://localhost:5173',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
