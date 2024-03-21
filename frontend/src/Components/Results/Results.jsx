@@ -1,5 +1,50 @@
 import React from "react";
 import "./results.css";
+import IndividualRow from "../IndividualRow";
+import { motion } from "framer-motion";
+
+const results = [
+  {
+    username: "Swapnil",
+    language: "C++",
+    stdin: "1 2 3 4",
+    stdout: "24",
+    source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
+    timestamp: "12:33:45",
+  },
+  {
+    username: "rishabh",
+    language: "Java",
+    stdin: "1 2 3 4",
+    stdout: "24",
+    source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
+    timestamp: "12:33:45",
+  },
+  {
+    username: "Rishav",
+    language: "C++",
+    stdin: "1 2 3 4",
+    stdout: "21",
+    source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
+    timestamp: "12:33:45",
+  },
+  {
+    username: "Abhinav",
+    language: "Javascript",
+    stdin: "1 2 3 4",
+    stdout: "2",
+    source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
+    timestamp: "12:33:45",
+  },
+  {
+    username: "Hrishi",
+    language: "Python",
+    stdin: "1 2 5 4",
+    stdout: "21",
+    source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
+    timestamp: "12:33:45",
+  },
+];
 
 function Results() {
   return (
@@ -16,30 +61,15 @@ function Results() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Name1</td>
-            <td>Lang1</td>
-            <td>stdin1</td>
-            <td>stdout1</td>
-            <td>source1</td>
-            <td>timestamps1</td>
-          </tr>
-          <tr>
-            <td>Name1</td>
-            <td>Lang1</td>
-            <td>stdin1</td>
-            <td>stdout1</td>
-            <td>source1</td>
-            <td>timestamps1</td>
-          </tr>
-          <tr>
-            <td>Name1</td>
-            <td>Lang1</td>
-            <td>stdin1</td>
-            <td>stdout1</td>
-            <td>source1</td>
-            <td>timestamps1</td>
-          </tr>
+          {results.map((result, index) => (
+            <motion.tr
+              initial={{ opacity: 0, x: -200 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.5, delay: 0.65 }}
+            >
+              <IndividualRow key={index} details={result} />
+            </motion.tr>
+          ))}
         </tbody>
       </table>
     </div>
