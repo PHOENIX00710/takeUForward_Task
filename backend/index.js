@@ -8,15 +8,21 @@ dotenv.config();
 const app = express()
 app.use(express.json())
 
-// To allow Vite Local host to get the request
+// To allow Vite Local host and deployed frontend to get access
+const allowedOrigins = ['http://localhost:5173', 'https://amazing-sunflower-c4f1dc.netlify.app'];
+
 const corsOptions = {
-    origin: 'http://localhost:5173',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204.
+};
 
-app.use(cors(corsOptions))
-
-console.log(process.env.DB_HOST,process.env.DB_USER,process.env.DB_PASSWORD,process.env.DB_NAME);
+app.use(cors(corsOptions));
 
 // Make Connection to the databse
 export const con = mysql.createConnection({
@@ -37,5 +43,5 @@ con.connect((err) => {
 app.use("/api/v1",entryRoutes)
 
 app.listen(3000, () => {
-    console.log('Server is running at port 3000')
+    console.log('Server is running')
 })

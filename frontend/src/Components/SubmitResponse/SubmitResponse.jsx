@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 function SubmitResponse() {
   // States for our Component
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     language: "54",
   });
   const [loading, setLoading] = useState(false);
@@ -106,9 +106,8 @@ function SubmitResponse() {
     const finalData = {
       ...formData,
       ["stdin"]: stdin,
-      ["sourceCode"]: sourceCode,
+      ["source"]: sourceCode,
     };
-    console.log(finalData);
 
     // Submit final Form Response
     setLoading(true);
@@ -119,16 +118,16 @@ function SubmitResponse() {
       },
       body: JSON.stringify(finalData),
     });
-    const data = res.json();
+    const data = await res.json();
     setLoading(false);
-    if (res.error) return setError(true);
+    if (data.error) return setError(true);
     navigate("/results");
   };
 
   return (
     <div className="min-h-screen flex justify-center items-center">
       <motion.div
-        initial={{ opacity: 0, y: 300 }}
+        initial={{ opacity: 0, y: 150 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 2.5, ease: [0.04, 0.62, 0.23, 1] }}
       >
@@ -141,9 +140,9 @@ function SubmitResponse() {
           <TextField
             variant="outlined"
             color="primary"
-            label="Name"
-            id="name"
-            name="name"
+            label="Username"
+            id="username"
+            name="username"
             fullWidth={true}
             size={"small"}
             required={true}
@@ -151,8 +150,8 @@ function SubmitResponse() {
           />
           <FormControl
             sx={{
-              width: "100%", // Full width on mobile
-              md: { width: "25%" }, // Adjust on larger screens
+              width: "100%",
+              md: { width: "25%" },
               backgroundColor: "white",
               border: "1px solid transparent",
               borderRadius: "1.9rem",
@@ -221,6 +220,7 @@ function SubmitResponse() {
           sx={{
             background: "linear-gradient(to right, #4fd1c5, #3b82f6);",
             boxShadow: "0 8px 20px rgba(99, 179, 237, 0.5)",
+            marginTop:"0.3rem"
           }}
           onClick={
             (e)=>{

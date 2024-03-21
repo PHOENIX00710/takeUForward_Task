@@ -3,47 +3,18 @@ import "./results.css";
 import IndividualRow from "../IndividualRow";
 import { motion } from "framer-motion";
 import { ClipLoader, PacmanLoader } from "react-spinners";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function Results() {
   const [loading, setLoading] = useState(true);
+  const navigate=useNavigate()
   const [result, setResult] = useState([
     {
       username: "Swapnil",
       language: "54",
       stdin: "1 2 3 4",
       stdout: "24",
-      source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
-      timestamp: "12:33:45",
-    },
-    {
-      username: "rishabh",
-      language: "54",
-      stdin: "1 2 3 4",
-      stdout: "24",
-      source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
-      timestamp: "12:33:45",
-    },
-    {
-      username: "Rishav",
-      language: "26",
-      stdin: "1 2 3 4",
-      stdout: "21",
-      source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
-      timestamp: "12:33:45",
-    },
-    {
-      username: "Abhinav",
-      language: "29",
-      stdin: "1 2 3 4",
-      stdout: "2",
-      source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
-      timestamp: "12:33:45",
-    },
-    {
-      username: "Hrishi",
-      language: "71",
-      stdin: "1 2 5 4",
-      stdout: "21",
       source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
       timestamp: "12:33:45",
     },
@@ -56,8 +27,8 @@ function Results() {
       let results = await fetch(
         "https://takeuforward-task.onrender.com/api/v1/getAllEntries"
       );
-      let data = results.json();
-      if (data.error) return console.log("Error is Jain");
+      let data = await results.json();
+      if (data.error) return console.log("Error");
       let finalData = data.result;
       finalData.map((data, ind) => {
         if (data.source.length > 100) data.source = data.source.substr(0, 101);
@@ -107,6 +78,21 @@ function Results() {
             </motion.tr>
           ))}
         </tbody>
+        <Button
+          color="primary"
+          variant="contained"
+          type="submit"
+          sx={{
+            background: "linear-gradient(to right, #4fd1c5, #3b82f6);",
+            boxShadow: "0 8px 20px rgba(99, 179, 237, 0.5)",
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/");
+          }}
+        >
+          Go Back
+        </Button>
       </table>
     </div>
   );

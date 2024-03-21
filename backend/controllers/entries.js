@@ -49,7 +49,6 @@ export const addNewEntry = async(req, res) => {
         })
         const tempRes= await finalData.data;
         stdout=tempRes
-        console.log(token,tempRes);
     } catch (error) {
         console.error(error);
     }
