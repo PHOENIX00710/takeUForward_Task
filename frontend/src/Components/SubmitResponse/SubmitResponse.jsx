@@ -17,7 +17,7 @@ function SubmitResponse() {
   // States for our Component
   const [formData, setFormData] = useState({
     name: "",
-    language: "1",
+    language: "54",
     stdin: "",
     sourceCode: "",
   });
@@ -124,6 +124,7 @@ function SubmitResponse() {
             name="name"
             fullWidth={true}
             size={"small"}
+            required={true}
             onChange={handleChange}
           />
           <FormControl
@@ -155,11 +156,12 @@ function SubmitResponse() {
               label="Language"
               onChange={handleChange}
               variant="outlined"
+              required={true}
             >
-              <MenuItem value={1}>C++</MenuItem>
-              <MenuItem value={2}>Java</MenuItem>
-              <MenuItem value={3}>JavaScript</MenuItem>
-              <MenuItem value={4}>Python</MenuItem>
+              <MenuItem value={54}>C++</MenuItem>
+              <MenuItem value={26}>Java</MenuItem>
+              <MenuItem value={29}>JavaScript</MenuItem>
+              <MenuItem value={71}>Python</MenuItem>
             </Select>
           </FormControl>
           <Textarea

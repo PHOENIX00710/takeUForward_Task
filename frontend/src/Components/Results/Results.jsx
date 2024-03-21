@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const results = [
   {
     username: "Swapnil",
-    language: "C++",
+    language: "54",
     stdin: "1 2 3 4",
     stdout: "24",
     source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
@@ -14,7 +14,7 @@ const results = [
   },
   {
     username: "rishabh",
-    language: "Java",
+    language: "54",
     stdin: "1 2 3 4",
     stdout: "24",
     source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
@@ -22,7 +22,7 @@ const results = [
   },
   {
     username: "Rishav",
-    language: "C++",
+    language: "26",
     stdin: "1 2 3 4",
     stdout: "21",
     source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
@@ -30,7 +30,7 @@ const results = [
   },
   {
     username: "Abhinav",
-    language: "Javascript",
+    language: "29",
     stdin: "1 2 3 4",
     stdout: "2",
     source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
@@ -38,7 +38,7 @@ const results = [
   },
   {
     username: "Hrishi",
-    language: "Python",
+    language: "71",
     stdin: "1 2 5 4",
     stdout: "21",
     source: "sjhaskdbaisvbakjscbaouscbasiucbaisucausicvaisucais",
@@ -63,9 +63,10 @@ function Results() {
         <tbody>
           {results.map((result, index) => (
             <motion.tr
+              key={index}
               initial={{ opacity: 0, x: -200 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.5, delay: 0.65 }}
+              transition={{ duration: 1.5, delay: 0.35 * index }}
             >
               <IndividualRow key={index} details={result} />
             </motion.tr>
