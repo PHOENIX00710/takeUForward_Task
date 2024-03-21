@@ -2,7 +2,7 @@ import { con } from "../index.js";
 import axios from 'axios'
 
 export const getAllEntriesHelper = (req, res) => {
-    let sql = 'SELECT * FROM Entries';
+    let sql = 'SELECT * FROM entries';
     con.query(sql, (err, result) => {
         if (err)
             return res.status(400).json({ success: false, message: "Error in retrieving data" });

@@ -2,10 +2,12 @@ import express from 'express'
 import dotenv from 'dotenv'
 import mysql from 'mysql'
 import entryRoutes from './routes/entries.js'
+import cors from 'cors'
 
 dotenv.config();
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 console.log(process.env.DB_HOST,process.env.DB_USER,process.env.DB_PASSWORD,process.env.DB_NAME);
 
