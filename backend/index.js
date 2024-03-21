@@ -9,7 +9,7 @@ const app = express()
 app.use(express.json())
 
 // To allow Vite Local host and deployed frontend to get access
-const allowedOrigins = ['http://localhost:5173', 'https://amazing-sunflower-c4f1dc.netlify.app'];
+const allowedOrigins = ['http://localhost:5173', 'https://amazing-sunflower-c4f1dc.netlify.app','https://tuffrontend.onrender.com'];
 
 const corsOptions = {
   origin: function (origin, callback) {
