@@ -7,7 +7,14 @@ import cors from 'cors'
 dotenv.config();
 const app = express()
 app.use(express.json())
-app.use(cors())
+
+// To allow Vite Local host to get the request
+const corsOptions = {
+    origin: 'http://localhost:5173/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+
+app.use(cors(corsOptions))
 
 console.log(process.env.DB_HOST,process.env.DB_USER,process.env.DB_PASSWORD,process.env.DB_NAME);
 
@@ -19,8 +26,7 @@ export const con = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
-
-
+// Connect to Database
 con.connect((err) => {
     if (err)
         return console.log("Error in connection: ",err);

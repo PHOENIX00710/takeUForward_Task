@@ -7,6 +7,7 @@ import {
   Select,
   TextField,
   MenuItem,
+  Alert,
 } from "@mui/material";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import { styled } from "@mui/system";
@@ -18,9 +19,9 @@ function SubmitResponse() {
   const [formData, setFormData] = useState({
     name: "",
     language: "54",
-    stdin: "",
-    sourceCode: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   // Material UI color customizations
@@ -89,17 +90,38 @@ function SubmitResponse() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(false);
+    setLoading(false);
     let stdin = document.getElementById("stdin").value;
     let sourceCode = document.getElementById("sourceCode").value;
+
+    // Check for empty Values
     if (!stdin || !sourceCode) {
-      return alert(
-        "Both STDIN and Source Code fields are required to run the code."
-      );
+      return setError(true);
     }
-    setFormData({ ...formData, ["stdin"]: stdin, ["sourceCode"]: sourceCode });
-    console.log(formData,stdin,sourceCode);
+
+    // Combine form data with sourceCode and stdin
+    const finalData = {
+      ...formData,
+      ["stdin"]: stdin,
+      ["sourceCode"]: sourceCode,
+    };
+    console.log(finalData);
+
+    // Submit final Form Response
+    setLoading(true);
+    const res = await fetch("https://takeuforward-task.onrender.com/api/v1/makeNewEntry", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(finalData),
+    });
+    const data = res.json();
+    setLoading(false);
+    if (res.error) return setError(true);
     navigate("/results");
   };
 
@@ -183,6 +205,7 @@ function SubmitResponse() {
             color="primary"
             variant="contained"
             type="submit"
+            disabled={loading}
             sx={{
               background: "linear-gradient(to right, #4fd1c5, #3b82f6);",
               boxShadow: "0 8px 20px rgba(99, 179, 237, 0.5)",
@@ -191,6 +214,24 @@ function SubmitResponse() {
             Submit
           </Button>
         </form>
+        <Button
+          color="primary"
+          variant="contained"
+          type="submit"
+          sx={{
+            background: "linear-gradient(to right, #4fd1c5, #3b82f6);",
+            boxShadow: "0 8px 20px rgba(99, 179, 237, 0.5)",
+          }}
+          onClick={
+            (e)=>{
+              e.preventDefault()
+              navigate("/results")
+            }
+          }
+        >
+          See Results
+        </Button>
+        {error && <Alert color="error">Error in Submission</Alert>}
       </motion.div>
     </div>
   );
